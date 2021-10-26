@@ -8,10 +8,22 @@
     <title>RASOR - ISS Tracker</title>
   </head>
   <body>
-    <div id="content">
-      <h1>ISS Tracker</h1>
-      <img src="assets/gmt.png" id="map" />
-      <div id="iss"></div>
+    <div id="container">
+      <h1>Where is the ISS?</h1>
+      <div id="map">
+        <img src="assets/gmt.png" id="globe" />
+        <img src="assets/iss.png" id="iss" />
+      </div>
+      <div id="info">
+        <div id="latlong">
+          <p class="latlong-title">Latitude:</p>
+          <p id="latitude">345435435</p>
+        </div>
+        <div id="latlong">
+          <p class="latlong-title">Longitude:</p>
+          <p id="longitude">345435435</p>
+        </div>
+      </div>
     </div>
     <script src="js/script.js"></script>
   </body>

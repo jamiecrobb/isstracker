@@ -1,9 +1,6 @@
-const header = document.getElementById("content");
 const iss = document.getElementById("iss");
-
-header.addEventListener("click", () => {
-  console.log("Clicked");
-});
+const latitude = document.getElementById("latitude");
+const longitude = document.getElementById("longitude");
 
 async function fetchText() {
   let response = await fetch("https://api.wheretheiss.at/v1/satellites/25544");
@@ -13,6 +10,8 @@ async function fetchText() {
     let data = await response.text();
     //console.log(data);
     return JSON.parse(data);
+  } else {
+    console.log("Something went wrong!");
   }
 }
 
@@ -20,16 +19,22 @@ const move_iss = async (input) => {
   let data = await input;
   const lat = data.latitude;
   const long = data.longitude;
-
   x_pos = find_xpos(long);
-  console.log(x_pos);
-  iss.style.position = "absolute";
-  iss.style.left = x_pos + "vw";
+  y_pos = find_ypos(lat);
+  iss.style.left = x_pos + "px";
+  iss.style.top = y_pos + "px";
+  latitude.innerHTML = `${lat}°`;
+  longitude.innerHTML = `${long}°`;
 };
 
 const find_xpos = (long) => {
-  const x_pos = 50 + long * (50 / 180);
+  const x_pos = 400 + long * (450 / 180);
   return x_pos;
+};
+
+const find_ypos = (lat) => {
+  const y_pos = 200 - lat * (225 / 90);
+  return y_pos;
 };
 
 const fn10secs = () => {
@@ -37,4 +42,4 @@ const fn10secs = () => {
   move_iss(data);
 };
 fn10secs();
-setInterval(fn10secs, 10 * 1000);
+setInterval(fn10secs, 1000);
